@@ -8,13 +8,14 @@ onReload();
 
 form.addEventListener('input', throttle(onFormInput, 500));
 
+let data = {};
 function onFormInput() {
-    const data = {};
+    
     data.email = input.value;
     data.message = textarea.value;
 
     localStorage.setItem("feedback-form-state", JSON.stringify(data));
-    console.log(data);
+    
 }
 
 function onReload() {
@@ -29,6 +30,8 @@ form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
     event.preventDefault;
-    event.currentTarget.reset();
+    // event.currentTarget.reset();
     localStorage.removeItem("feedback-form-state");
+    console.log(data);
+    data = {};
 }

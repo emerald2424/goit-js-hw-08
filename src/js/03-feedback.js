@@ -10,12 +10,11 @@ form.addEventListener('input', throttle(onFormInput, 500));
 
 let data = {};
 function onFormInput() {
-    
     data.email = input.value;
     data.message = textarea.value;
 
     localStorage.setItem("feedback-form-state", JSON.stringify(data));
-    
+
 }
 
 function onReload() {
@@ -26,12 +25,23 @@ function onReload() {
     } 
 }
 
+
+
 form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
     event.preventDefault;
+    checkFormCompleteness();
     // event.currentTarget.reset();
     localStorage.removeItem("feedback-form-state");
     console.log(data);
     data = {};
+
+}
+
+function checkFormCompleteness() {
+    if (!input.value || !textarea.value) {
+        alert ("Fill in all the fields, please!");
+        event.preventDefault();
+    }
 }
